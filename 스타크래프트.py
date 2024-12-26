@@ -14,10 +14,10 @@ class unit:
     def damaged(self,damage):
         if self.hp>damage:
             self.hp-=damage
-            print("{0}의 데미지를 받았습니다. [남은 체력:{1}]".format(damage, self.hp))
+            print("{0}:{1}의 데미지를 받았습니다. [남은 체력:{2}]".format(self.name,damage, self.hp))
         elif self.hp<=damage:
             self.hp=0
-            print("파괴되었습니다.[남은 체력:{0}]".format(self.hp))
+            print("{0}:파괴되었습니다.[남은 체력:{1}]".format(self.name,self.hp))
 
 
 #어택 유닛 클래스/이름, 체력, 속도, 데미지/ 공격 함
@@ -86,10 +86,10 @@ class flyable_attack_unit(flyable, attack_unit):
 class wraith(flyable_attack_unit):
     def __init__(self):
         flyable_attack_unit.__init__(self,"레이스", 80, 20, 5)
-        self.clock=False #동일한 레이스에서는 클록이 한 번만 불러지고 상태를 변경할 떄마다 그 변경 상태를 유지하고, 다른 레이스면 초기값으로 다시 부른다. 이는 self라서 가능하고 self가 없다면 매번 초기화되어 같은 값을 낸다. 또한 self가 없다면 다른 함수에서 접근할 수 없다.
+        self.clock=False #동일한 레이스에서는 클록이 한 번만 불러지고 상태를 변경할 떄마다 그 변경 상태를 유지하고, 다른 레이스면 초기값으로 다시 부른다. 또한 self가 없다면 다른 함수에서 접근할 수 없다.
 
     def clocking(self):
-        #clock=False 만약 clock가 여기 있다면 항상 false상태이므로 위쪽 함수에 넣는다.
+        #clock=False 만약 clock가 여기 있다면 항상 false상태이므로 위쪽 함수에 넣는다. init함수는 처음에만 불러지고 초기값만 정한다.
         if self.clock==False:
             print("클로킹을 겁니다.")
             self.clock=True
